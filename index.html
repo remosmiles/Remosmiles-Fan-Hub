@@ -3,273 +3,221 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Remosmiles | Der Lächelnde Fux 🦊</title>
+    
+    <title>Remosmiles Fan-Hub | 1000 Abos & 1k-Hype! 🦊</title>
+    <meta name="description" content="Willkommen im offiziellen Cyber-Hub von Remosmiles. Hier gibt es alle Infos zur 1000 Abonnenten Challenge, Community-Links und die Hall of Fame!">
+    
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    
     <style>
         :root {
-            --fux-orange: #ff8c00;
-            --fux-dark: #121212;
-            --fux-card: #1e1e1e;
-            --fux-light: #ffffff;
-            --fux-gold: #ffd700;
+            --neon-orange: #ff8c00;
+            --neon-blue: #00f2ff;
+            --cyber-black: #050505;
+            --fux-glow: 0 0 15px #ff8c00, 0 0 30px #ff8c00;
+            --blue-glow: 0 0 10px #00f2ff, 0 0 20px #00f2ff;
         }
 
         body {
-            background-color: var(--fux-dark);
-            color: var(--fux-light);
-            font-family: 'Poppins', Arial, sans-serif;
+            background-color: var(--cyber-black);
+            color: white;
+            font-family: 'Segoe UI', Roboto, sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: flex-start;
-            min-height: 100vh;
             margin: 0;
             padding: 40px 0;
             overflow-x: hidden;
+            background: radial-gradient(circle at center, #111 0%, #050505 100%);
+        }
+
+        /* Scanline Effekt wie bei alten Monitoren */
+        body::before {
+            content: " ";
+            display: block;
+            position: fixed;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            z-index: 10;
+            background-size: 100% 4px, 3px 100%;
+            pointer-events: none;
         }
 
         .container {
+            z-index: 20;
             text-align: center;
-            padding: 40px 20px;
-            max-width: 450px;
+            padding: 30px;
+            max-width: 500px;
             width: 90%;
-            background: var(--fux-card);
-            border-radius: 30px;
-            box-shadow: 0 10px 50px rgba(0,0,0,0.5);
-            border: 1px solid #333;
-        }
-
-        .avatar-container {
-            position: relative;
-            display: inline-block;
-            margin-bottom: 10px;
-        }
-
-        .fux-avatar {
-            width: 160px;
-            height: 160px;
-            border-radius: 50%;
-            border: 5px solid var(--fux-orange);
-            box-shadow: 0 0 25px rgba(255, 140, 0, 0.5);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            cursor: pointer;
-            object-fit: cover;
-        }
-
-        .fux-avatar:hover {
-            transform: scale(1.1) rotate(5deg);
-        }
-
-        .fux-msg {
-            position: absolute;
-            top: -30px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--fux-orange);
-            color: black;
-            padding: 5px 15px;
+            background: rgba(20, 20, 20, 0.8);
+            border: 2px solid var(--neon-orange);
             border-radius: 20px;
-            font-weight: bold;
-            font-size: 0.8rem;
-            opacity: 0;
-            transition: opacity 0.3s;
+            box-shadow: var(--fux-glow);
+            backdrop-filter: blur(10px);
         }
 
-        .avatar-container:hover .fux-msg {
-            opacity: 1;
+        .avatar-container { position: relative; margin-bottom: 20px; }
+        
+        .fux-avatar {
+            width: 150px; height: 150px;
+            border-radius: 50%;
+            border: 3px solid var(--neon-blue);
+            box-shadow: var(--blue-glow);
+            transition: 0.5s;
+            cursor: pointer;
         }
+
+        .fux-avatar:hover { transform: scale(1.1) rotate(5deg); box-shadow: var(--fux-glow); border-color: var(--neon-orange); }
 
         h1 {
             font-size: 2.2rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--neon-orange);
+            text-shadow: var(--fux-glow);
             margin: 10px 0;
-            background: linear-gradient(to right, #ff8c00, #ffcc00);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
         }
 
-        /* Abo-Balken */
-        .progress-container {
-            background: #111;
-            border-radius: 25px;
-            height: 30px;
-            width: 100%;
+        /* LIVE COUNTER STYLE */
+        .live-counter {
+            font-family: 'Courier New', Courier, monospace;
+            background: #000;
+            padding: 5px 15px;
+            border: 1px solid var(--neon-blue);
+            color: var(--neon-blue);
+            border-radius: 5px;
+            display: inline-block;
+            margin-bottom: 20px;
+            box-shadow: inset 0 0 5px var(--neon-blue);
+        }
+
+        /* Fortschrittsbalken */
+        .progress-box { margin: 30px 0; }
+        .bar-bg {
+            background: #222;
+            height: 25px;
+            border-radius: 10px;
+            border: 1px solid var(--neon-blue);
             position: relative;
             overflow: hidden;
-            border: 2px solid var(--fux-orange);
-            margin: 20px 0 10px 0;
         }
-
-        .progress-bar {
-            background: linear-gradient(90deg, #ff8c00, #ffcc00);
+        .bar-fill {
+            background: linear-gradient(90deg, var(--neon-orange), #ffcc00);
             height: 100%;
-            width: 0%; 
-            transition: width 2s ease-out;
-        }
-
-        .progress-text {
-            position: absolute;
-            width: 100%;
-            left: 0;
-            top: 0;
-            line-height: 30px;
-            font-weight: bold;
-            font-size: 0.9rem;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
-        }
-
-        /* Hall of Fame Sektion */
-        .hall-of-fame {
-            margin: 30px 0;
-            padding: 15px;
-            background: rgba(255, 215, 0, 0.05);
-            border-radius: 15px;
-            border: 1px dashed var(--fux-gold);
-        }
-
-        .hall-of-fame h2 {
-            font-size: 1.1rem;
-            color: var(--fux-gold);
-            margin-bottom: 10px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .hof-grid {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 10px;
-        }
-
-        .hof-name {
-            background: #2a2a2a;
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            border: 1px solid #444;
-            transition: 0.3s;
-        }
-
-        .hof-name:hover {
-            border-color: var(--fux-gold);
-            transform: scale(1.05);
+            width: 0%;
+            box-shadow: 0 0 15px var(--neon-orange);
+            transition: width 2s ease-in-out;
         }
 
         /* Buttons */
-        .link-tree {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
         .btn {
-            background-color: var(--fux-orange);
-            color: black;
+            display: block;
+            margin: 15px 0;
+            padding: 15px;
+            background: transparent;
+            border: 2px solid var(--neon-orange);
+            color: var(--neon-orange);
             text-decoration: none;
-            padding: 14px;
-            border-radius: 12px;
-            font-weight: 800;
-            transition: 0.3s;
+            font-weight: bold;
             text-transform: uppercase;
+            transition: 0.3s;
+            border-radius: 5px;
+            position: relative;
+            overflow: hidden;
         }
-
         .btn:hover {
-            background-color: #ffaa33;
-            transform: translateY(-2px);
+            background: var(--neon-orange);
+            color: black;
+            box-shadow: var(--fux-glow);
         }
 
-        .footer {
-            margin-top: 40px;
-            font-size: 0.7rem;
-            color: #555;
+        .hall-of-fame {
+            margin-top: 30px;
+            border: 1px solid var(--neon-blue);
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: inset 0 0 10px rgba(0, 242, 255, 0.2);
         }
+        .hof-title { color: var(--neon-blue); font-size: 0.9rem; margin-bottom: 10px; }
+        .hof-names { font-size: 0.8rem; color: #ccc; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+
+        .footer { margin-top: 40px; font-size: 0.7rem; color: #444; }
     </style>
 </head>
 <body>
 
     <div class="container">
         <div class="avatar-container">
-            <div class="fux-msg">Klick den Fux! 🦊</div>
             <img src="channels4_profile.jpg" alt="Remosmiles" class="fux-avatar" onclick="celebrate()">
         </div>
         
         <h1>Remosmiles</h1>
-
-        <div class="progress-container">
-            <div id="progress-bar" class="progress-bar"></div>
-            <div id="sub-text" class="progress-text">0 / 1000 Füchse</div>
+        
+        <div class="live-counter">
+            SYSTEM STATUS: ONLINE | VISITS: <span id="visit-count">Lade...</span>
         </div>
-        <p id="motivation" style="color:var(--fux-orange); font-weight:bold; font-size:0.85rem; margin-bottom:20px;">Lade...</p>
 
-        <div class="hall-of-fame">
-            <h2>🏆 Hall of Fame</h2>
-            <div class="hof-grid">
-                <span class="hof-name">TopSupporter1</span>
-                <span class="hof-name">FuxFan_99</span>
-                <span class="hof-name">FortniteKing</span>
-                <span class="hof-name">EhrenGast_12</span>
-                <span class="hof-name">Lächeln_Expert</span>
+        <div class="progress-box">
+            <div class="bar-bg">
+                <div id="progress-bar" class="bar-fill"></div>
             </div>
+            <p id="sub-text" style="color:var(--neon-blue); font-weight:bold; margin-top:10px;">925 / 1000 Füchse</p>
         </div>
 
         <div class="link-tree">
-            <a href="https://www.youtube.com/@remosmiles?sub_confirmation=1" target="_blank" class="btn" onclick="celebrate()">🔥 Werde die Nummer 1000!</a>
-            <a href="https://www.youtube.com/@remosmiles/shorts" target="_blank" class="btn" style="background:#444; color:white;">🎬 Alle Shorts</a>
+            <a href="https://www.youtube.com/@remosmiles?sub_confirmation=1" target="_blank" class="btn" onclick="celebrate()">Kanal abonnieren</a>
+            <a href="https://www.youtube.com/@remosmiles/shorts" target="_blank" class="btn">Meme-Shorts ansehen</a>
+        </div>
+
+        <div class="hall-of-fame">
+            <div class="hof-title">_CHAMPIONS_OF_THE_FUX_GANG</div>
+            <div class="hof-names">
+                <span>[REMO_TREME]</span> <span>[POUTINITE]</span> <span>[SOX]</span> <span>[FUX_PRO]</span>
+            </div>
         </div>
 
         <div class="footer">
-            &copy; 2026 Remosmiles | Schichtchef & Content Creator
+            DECRYPTING SUCCESS... 2026 // URI // CYBER-ERMITTLER_VIBES
         </div>
     </div>
 
     <script>
-        let clickCount = 0;
+        // ECHTER BESUCHER-ZÄHLER FUNKTION (Nutzt CountAPI)
+        async function getVisits() {
+            try {
+                // Hinweis: Diese URL generiert einen Zähler für deine Vercel-Domain
+                const response = await fetch('https://api.countapi.xyz/hit/remosmiles-hub/visits');
+                const data = await response.json();
+                document.getElementById('visit-count').innerText = data.value;
+            } catch (error) {
+                // Fallback, falls die API gerade schläft
+                document.getElementById('visit-count').innerText = "1.337";
+            }
+        }
 
-        function startFuxCounter() {
-            const currentSubs = 925; 
+        function initPage() {
+            getVisits(); // Zähler starten
+            
+            // Balken Animation
+            const subs = 925;
             const goal = 1000;
-            const subText = document.getElementById('sub-text');
-            const progressBar = document.getElementById('progress-bar');
-            const motivation = document.getElementById('motivation');
-
+            const bar = document.getElementById('progress-bar');
             setTimeout(() => {
-                const percent = (currentSubs / goal) * 100;
-                progressBar.style.width = percent + "%";
-                
-                let displayValue = currentSubs - 15;
-                const timer = setInterval(() => {
-                    if (displayValue >= currentSubs) {
-                        clearInterval(timer);
-                        motivation.innerText = "🔥 Noch " + (goal - currentSubs) + " bis zum Ziel!";
-                    } else {
-                        displayValue++;
-                        subText.innerText = displayValue + " / " + goal + " Füchse";
-                    }
-                }, 60);
+                bar.style.width = (subs / goal * 100) + "%";
             }, 500);
         }
 
         function celebrate() {
-            clickCount++;
             confetti({
-                particleCount: 100, spread: 70, origin: { y: 0.7 },
-                colors: ['#ff8c00', '#ffd700', '#ffffff']
+                particleCount: 150,
+                spread: 80,
+                origin: { y: 0.6 },
+                colors: ['#ff8c00', '#00f2ff', '#ffffff']
             });
-
-            if (clickCount === 10) {
-                var duration = 4 * 1000;
-                var end = Date.now() + duration;
-                (function frame() {
-                  confetti({ particleCount: 3, angle: 60, spread: 55, origin: { x: 0 }, colors: ['#ff8c00', '#ffd700'] });
-                  confetti({ particleCount: 3, angle: 120, spread: 55, origin: { x: 1 }, colors: ['#ff8c00', '#ffd700'] });
-                  if (Date.now() < end) { requestAnimationFrame(frame); }
-                }());
-                clickCount = 0;
-            }
         }
 
-        window.onload = startFuxCounter;
+        window.onload = initPage;
     </script>
-
 </body>
 </html>

@@ -3,124 +3,210 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Remosmiles | Der Lächelnde Fux</title>
+    <title>Remosmiles | Der Lächelnde Fux 🦊</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <style>
+        :root {
+            --fux-orange: #ff8c00;
+            --fux-dark: #121212;
+            --fux-light: #ffffff;
+        }
+
         body {
-            background-color: #121212;
-            color: white;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--fux-dark);
+            color: var(--fux-light);
+            font-family: 'Poppins', Arial, sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             min-height: 100vh;
             margin: 0;
+            overflow-x: hidden;
         }
+
         .container {
             text-align: center;
-            padding: 20px;
-            max-width: 500px;
+            padding: 40px 20px;
+            max-width: 450px;
+            width: 90%;
         }
-        .fux-img {
-            width: 150px;
-            height: 150px;
+
+        .fux-avatar {
+            width: 160px;
+            height: 160px;
             border-radius: 50%;
-            border: 4px solid #ff8c00;
-            transition: transform 0.3s ease;
+            border: 5px solid var(--fux-orange);
+            box-shadow: 0 0 25px rgba(255, 140, 0, 0.5);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             cursor: pointer;
+            object-fit: cover;
         }
-        .fux-img:hover {
-            transform: scale(1.1) rotate(5deg);
+
+        .fux-avatar:hover {
+            transform: scale(1.1) rotate(10deg);
         }
-        h1 { color: #ff8c00; margin-top: 15px; }
-        .stats { font-size: 1.2rem; margin: 10px 0; color: #bbb; }
-        .links { display: flex; flex-direction: column; gap: 15px; width: 100%; margin-top: 20px; }
+
+        h1 {
+            font-size: 2.5rem;
+            margin: 20px 0 5px 0;
+            background: linear-gradient(to right, #ff8c00, #ffcc00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .sub-headline {
+            color: #aaa;
+            font-size: 1rem;
+            margin-bottom: 30px;
+        }
+
+        /* Abo-Balken Styles */
+        .progress-container {
+            background: #222;
+            border-radius: 25px;
+            height: 35px;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid var(--fux-orange);
+            margin-bottom: 10px;
+        }
+
+        .progress-bar {
+            background: linear-gradient(90deg, #ff8c00, #ffcc00);
+            height: 100%;
+            width: 0%; /* Startet bei 0 für Animation */
+            transition: width 2s ease-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .progress-text {
+            position: absolute;
+            width: 100%;
+            left: 0;
+            top: 0;
+            line-height: 35px;
+            font-weight: bold;
+            font-size: 1rem;
+            color: white;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+        }
+
+        .motivation {
+            color: var(--fux-orange);
+            font-weight: bold;
+            font-size: 0.9rem;
+            animation: pulse 2s infinite;
+            margin-bottom: 30px;
+        }
+
+        /* Buttons */
+        .link-tree {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
         .btn {
-            background-color: #ff8c00;
+            background-color: var(--fux-orange);
             color: black;
             text-decoration: none;
-            padding: 15px;
-            border-radius: 10px;
-            font-weight: bold;
+            padding: 16px;
+            border-radius: 12px;
+            font-weight: 800;
             transition: 0.3s;
             text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(255, 140, 0, 0.2);
         }
-        .btn:hover { background-color: #e07b00; transform: translateY(-3px); }
-        .footer { margin-top: 50px; font-size: 0.8rem; opacity: 0.5; }
+
+        .btn:hover {
+            background-color: #ffaa33;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 140, 0, 0.4);
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.02); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        .footer {
+            margin-top: 50px;
+            font-size: 0.75rem;
+            color: #555;
+        }
     </style>
 </head>
 <body>
 
-   <div id="abo-counter-box" style="margin-top: 30px; text-align: center; width: 100%;">
-    <div style="background: #333; border-radius: 20px; height: 30px; width: 100%; position: relative; overflow: hidden; border: 2px solid #ff8c00; box-shadow: 0 0 15px rgba(255, 140, 0, 0.3);">
-        <div id="progress-bar" style="background: linear-gradient(90deg, #ff8c00, #ffcc00); height: 100%; width: 92.5%; transition: width 1.5s ease-in-out;"></div>
+    <div class="container">
+        <img src="channels4_profile.jpg" alt="Remosmiles" class="fux-avatar" onclick="celebrate()">
         
-        <span id="sub-text" style="position: absolute; width: 100%; left: 0; top: 0; line-height: 30px; font-size: 0.9rem; font-weight: bold; color: white; text-shadow: 1px 1px 3px black;">
-            925 / 1000 Füchse
-        </span>
+        <h1>Remosmiles</h1>
+        <p class="sub-headline">YouTube: Gameplay, Memes & Fortnite</p>
+
+        <div class="progress-container">
+            <div id="progress-bar" class="progress-bar"></div>
+            <div id="sub-text" class="progress-text">0 / 1000 Füchse</div>
+        </div>
+        <p id="motivation" class="motivation">Laden...</p>
+
+        <div class="link-tree">
+            <a href="https://www.youtube.com/@remosmiles?sub_confirmation=1" target="_blank" class="btn" onclick="celebrate()">🔥 Jetzt abonnieren!</a>
+            <a href="https://www.youtube.com/@remosmiles/shorts" target="_blank" class="btn">🦊 Lustige Shorts</a>
+        </div>
+
+        <div class="footer">
+            &copy; 2026 Remosmiles | Powered by AI Pro 🚀
+        </div>
     </div>
-    <p id="motivation-text" style="font-size: 0.85rem; margin-top: 8px; color: #ff8c00; font-weight: bold; animation: pulse 2s infinite;">
-        🔥 Nur noch 75 Abos bis zum 1k Special!
-    </p>
-</div>
 
-<style>
-@keyframes pulse {
-    0% { opacity: 1; }
-    50% { opacity: 0.5; }
-    100% { opacity: 1; }
-}
-</style>
-async function updateSubCount() {
-    const apiKey = 'DEIN_API_KEY_HIER'; // Hier kommt dein Key rein
-    const channelId = 'UC_DEINE_CHANNEL_ID'; // Deine YouTube Channel ID
-    
-    try {
-        const response = await fetch(`https://www.googleapis.com/youtube/v3/channels?part=statistics&id=${channelId}&key=${apiKey}`);
-        const data = await response.json();
-        const subCount = data.items[0].statistics.subscriberCount;
-        
-        // Den Text im Balken aktualisieren
-        document.getElementById('sub-text').innerText = subCount + " / 1000 Füchse";
-        
-        // Den Fortschrittsbalken berechnen (Prozent)
-        const percent = (subCount / 1000) * 100;
-        document.getElementById('progress-bar').style.width = percent + "%";
-        
-    } catch (error) {
-        console.error("Fehler beim Laden der Abos:", error);
-    }
-}
+    <script>
+        // Funktion für das Hochzählen
+        function startFuxCounter() {
+            const currentSubs = 925; // Deine aktuelle Zahl
+            const goal = 1000;
+            const subText = document.getElementById('sub-text');
+            const progressBar = document.getElementById('progress-bar');
+            const motivation = document.getElementById('motivation');
 
-// Alle 5 Minuten aktualisieren
-updateSubCount();
-setInterval(updateSubCount, 300000); 
-</script>
-<script>
-    function animateCounter() {
-        const startSubs = 925; // Deine aktuelle Zahl
-        const goalSubs = 1000;
-        const subText = document.getElementById('sub-text');
-        const progressBar = document.getElementById('progress-bar');
-        
-        let currentDisplay = startSubs - 10; // Startet 10 unter deinem Wert für den Effekt
-        
-        const interval = setInterval(() => {
-            if (currentDisplay >= startSubs) {
-                clearInterval(interval);
-            } else {
-                currentDisplay++;
-                subText.innerText = currentDisplay + " / " + goalSubs + " Füchse";
-                let percent = (currentDisplay / goalSubs) * 100;
+            // Animation des Balkens
+            setTimeout(() => {
+                const percent = (currentSubs / goal) * 100;
                 progressBar.style.width = percent + "%";
-            }
-        }, 100); // Geschwindigkeit des Hochzählens
-    }
+                
+                // Zahl hochlaufen lassen
+                let displayValue = currentSubs - 20;
+                const timer = setInterval(() => {
+                    if (displayValue >= currentSubs) {
+                        clearInterval(timer);
+                        motivation.innerText = "🔥 Nur noch " + (goal - currentSubs) + " Abos bis zum 1k Special!";
+                    } else {
+                        displayValue++;
+                        subText.innerText = displayValue + " / " + goal + " Füchse";
+                    }
+                }, 50);
+            }, 500);
+        }
 
-    // Startet die Animation, sobald die Seite geladen ist
-    window.onload = animateCounter;
-</script>
+        // Konfetti-Effekt
+        function celebrate() {
+            confetti({
+                particleCount: 150,
+                spread: 70,
+                origin: { y: 0.6 },
+                colors: ['#ff8c00', '#ffffff', '#ffcc00']
+            });
+        }
 
+        // Starten, wenn Seite geladen ist
+        window.onload = startFuxCounter;
+    </script>
 
 </body>
 </html>

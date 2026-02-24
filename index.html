@@ -9,6 +9,7 @@
         :root {
             --fux-orange: #ff8c00;
             --fux-dark: #121212;
+            --fux-card: #1e1e1e;
             --fux-light: #ffffff;
         }
 
@@ -30,6 +31,16 @@
             padding: 40px 20px;
             max-width: 450px;
             width: 90%;
+            background: var(--fux-card);
+            border-radius: 30px;
+            box-shadow: 0 10px 50px rgba(0,0,0,0.5);
+            border: 1px solid #333;
+        }
+
+        /* Avatar Styling */
+        .avatar-container {
+            position: relative;
+            display: inline-block;
         }
 
         .fux-avatar {
@@ -44,7 +55,29 @@
         }
 
         .fux-avatar:hover {
-            transform: scale(1.1) rotate(10deg);
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        /* Tooltip Nachricht */
+        .fux-msg {
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--fux-orange);
+            color: black;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.8rem;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+
+        .avatar-container:hover .fux-msg {
+            opacity: 1;
         }
 
         h1 {
@@ -63,7 +96,7 @@
 
         /* Abo-Balken Styles */
         .progress-container {
-            background: #222;
+            background: #111;
             border-radius: 25px;
             height: 35px;
             width: 100%;
@@ -76,11 +109,8 @@
         .progress-bar {
             background: linear-gradient(90deg, #ff8c00, #ffcc00);
             height: 100%;
-            width: 0%; /* Startet bei 0 für Animation */
+            width: 0%; 
             transition: width 2s ease-out;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
         .progress-text {
@@ -99,11 +129,11 @@
             color: var(--fux-orange);
             font-weight: bold;
             font-size: 0.9rem;
-            animation: pulse 2s infinite;
             margin-bottom: 30px;
+            min-height: 20px;
         }
 
-        /* Buttons */
+        /* Links */
         .link-tree {
             display: flex;
             flex-direction: column;
@@ -120,7 +150,7 @@
             transition: 0.3s;
             text-transform: uppercase;
             letter-spacing: 1px;
-            box-shadow: 0 4px 15px rgba(255, 140, 0, 0.2);
+            position: relative;
         }
 
         .btn:hover {
@@ -129,10 +159,21 @@
             box-shadow: 0 6px 20px rgba(255, 140, 0, 0.4);
         }
 
-        @keyframes pulse {
-            0% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.7; transform: scale(1.02); }
-            100% { opacity: 1; transform: scale(1); }
+        /* Dankes-Nachricht beim Hover */
+        .btn-sub::after {
+            content: "Ehren-Fux! ❤️";
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.7rem;
+            color: var(--fux-orange);
+            opacity: 0;
+            transition: 0.3s;
+        }
+
+        .btn-sub:hover::after {
+            opacity: 1;
         }
 
         .footer {
@@ -145,47 +186,50 @@
 <body>
 
     <div class="container">
-        <img src="channels4_profile.jpg" alt="Remosmiles" class="fux-avatar" onclick="celebrate()">
+        <div class="avatar-container">
+            <div class="fux-msg">Klick mich! 🦊</div>
+            <img src="channels4_profile.jpg" alt="Remosmiles" class="fux-avatar" onclick="celebrate()">
+        </div>
         
         <h1>Remosmiles</h1>
-        <p class="sub-headline">YouTube: Gameplay, Memes & Fortnite</p>
+        <p class="sub-headline">Fortnite Gameplay & Memes</p>
 
         <div class="progress-container">
             <div id="progress-bar" class="progress-bar"></div>
             <div id="sub-text" class="progress-text">0 / 1000 Füchse</div>
         </div>
-        <p id="motivation" class="motivation">Laden...</p>
+        <p id="motivation" class="motivation">Lade Fux-Power...</p>
 
         <div class="link-tree">
-            <a href="https://www.youtube.com/@remosmiles?sub_confirmation=1" target="_blank" class="btn" onclick="celebrate()">🔥 Jetzt abonnieren!</a>
-            <a href="https://www.youtube.com/@remosmiles/shorts" target="_blank" class="btn">🦊 Lustige Shorts</a>
+            <a href="https://www.youtube.com/@remosmiles?sub_confirmation=1" target="_blank" class="btn btn-sub" onclick="celebrate()">🔥 Werde Teil der 1000!</a>
+            <a href="https://www.youtube.com/@remosmiles/shorts" target="_blank" class="btn">🦊 Beste Shorts</a>
+            <a href="https://www.tiktok.com/@deintiktok" target="_blank" class="btn" style="background: #fff; color: #000;">🎵 TikTok Memes</a>
         </div>
 
         <div class="footer">
-            &copy; 2026 Remosmiles | Powered by AI Pro 🚀
+            &copy; 2026 Remosmiles | Mit KI-Power zum Sieg 👑
         </div>
     </div>
 
     <script>
-        // Funktion für das Hochzählen
+        let clickCount = 0;
+
         function startFuxCounter() {
-            const currentSubs = 925; // Deine aktuelle Zahl
+            const currentSubs = 925; 
             const goal = 1000;
             const subText = document.getElementById('sub-text');
             const progressBar = document.getElementById('progress-bar');
             const motivation = document.getElementById('motivation');
 
-            // Animation des Balkens
             setTimeout(() => {
                 const percent = (currentSubs / goal) * 100;
                 progressBar.style.width = percent + "%";
                 
-                // Zahl hochlaufen lassen
                 let displayValue = currentSubs - 20;
                 const timer = setInterval(() => {
                     if (displayValue >= currentSubs) {
                         clearInterval(timer);
-                        motivation.innerText = "🔥 Nur noch " + (goal - currentSubs) + " Abos bis zum 1k Special!";
+                        motivation.innerText = "🔥 Noch " + (goal - currentSubs) + " Abos bis zum 1k Special!";
                     } else {
                         displayValue++;
                         subText.innerText = displayValue + " / " + goal + " Füchse";
@@ -194,17 +238,40 @@
             }, 500);
         }
 
-        // Konfetti-Effekt
         function celebrate() {
+            clickCount++;
+            
+            // Konfetti-Stoß
             confetti({
-                particleCount: 150,
+                particleCount: 120,
                 spread: 70,
-                origin: { y: 0.6 },
+                origin: { y: 0.7 },
                 colors: ['#ff8c00', '#ffffff', '#ffcc00']
             });
+
+            // EASTER EGG: Nach 10 Klicks
+            if (clickCount === 10) {
+                var duration = 3 * 1000;
+                var animationEnd = Date.now() + duration;
+                var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+
+                function randomInRange(min, max) {
+                  return Math.random() * (max - min) + min;
+                }
+
+                var interval = setInterval(function() {
+                  var timeLeft = animationEnd - Date.now();
+                  if (timeLeft <= 0) { return clearInterval(interval); }
+                  var particleCount = 50 * (timeLeft / duration);
+                  confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } }));
+                  confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } }));
+                }, 250);
+
+                setTimeout(() => { alert("🦊 ULTRA-FUX MODUS AKTIVIERT!"); }, 500);
+                clickCount = 0;
+            }
         }
 
-        // Starten, wenn Seite geladen ist
         window.onload = startFuxCounter;
     </script>
 

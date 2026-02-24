@@ -96,5 +96,31 @@ async function updateSubCount() {
 updateSubCount();
 setInterval(updateSubCount, 300000); 
 </script>
+<script>
+    function animateCounter() {
+        const startSubs = 925; // Deine aktuelle Zahl
+        const goalSubs = 1000;
+        const subText = document.getElementById('sub-text');
+        const progressBar = document.getElementById('progress-bar');
+        
+        let currentDisplay = startSubs - 10; // Startet 10 unter deinem Wert für den Effekt
+        
+        const interval = setInterval(() => {
+            if (currentDisplay >= startSubs) {
+                clearInterval(interval);
+            } else {
+                currentDisplay++;
+                subText.innerText = currentDisplay + " / " + goalSubs + " Füchse";
+                let percent = (currentDisplay / goalSubs) * 100;
+                progressBar.style.width = percent + "%";
+            }
+        }, 100); // Geschwindigkeit des Hochzählens
+    }
+
+    // Startet die Animation, sobald die Seite geladen ist
+    window.onload = animateCounter;
+</script>
+
+
 </body>
 </html>

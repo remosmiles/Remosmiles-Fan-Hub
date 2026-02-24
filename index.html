@@ -11,6 +11,7 @@
             --fux-dark: #121212;
             --fux-card: #1e1e1e;
             --fux-light: #ffffff;
+            --fux-gold: #ffd700;
         }
 
         body {
@@ -20,9 +21,10 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start;
             min-height: 100vh;
             margin: 0;
+            padding: 40px 0;
             overflow-x: hidden;
         }
 
@@ -37,10 +39,10 @@
             border: 1px solid #333;
         }
 
-        /* Avatar Styling */
         .avatar-container {
             position: relative;
             display: inline-block;
+            margin-bottom: 10px;
         }
 
         .fux-avatar {
@@ -58,10 +60,9 @@
             transform: scale(1.1) rotate(5deg);
         }
 
-        /* Tooltip Nachricht */
         .fux-msg {
             position: absolute;
-            top: -40px;
+            top: -30px;
             left: 50%;
             transform: translateX(-50%);
             background: var(--fux-orange);
@@ -70,10 +71,8 @@
             border-radius: 20px;
             font-weight: bold;
             font-size: 0.8rem;
-            white-space: nowrap;
             opacity: 0;
             transition: opacity 0.3s;
-            pointer-events: none;
         }
 
         .avatar-container:hover .fux-msg {
@@ -81,29 +80,23 @@
         }
 
         h1 {
-            font-size: 2.5rem;
-            margin: 20px 0 5px 0;
+            font-size: 2.2rem;
+            margin: 10px 0;
             background: linear-gradient(to right, #ff8c00, #ffcc00);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        .sub-headline {
-            color: #aaa;
-            font-size: 1rem;
-            margin-bottom: 30px;
-        }
-
-        /* Abo-Balken Styles */
+        /* Abo-Balken */
         .progress-container {
             background: #111;
             border-radius: 25px;
-            height: 35px;
+            height: 30px;
             width: 100%;
             position: relative;
             overflow: hidden;
             border: 2px solid var(--fux-orange);
-            margin-bottom: 10px;
+            margin: 20px 0 10px 0;
         }
 
         .progress-bar {
@@ -118,67 +111,76 @@
             width: 100%;
             left: 0;
             top: 0;
-            line-height: 35px;
+            line-height: 30px;
             font-weight: bold;
-            font-size: 1rem;
-            color: white;
+            font-size: 0.9rem;
             text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
         }
 
-        .motivation {
-            color: var(--fux-orange);
-            font-weight: bold;
-            font-size: 0.9rem;
-            margin-bottom: 30px;
-            min-height: 20px;
+        /* Hall of Fame Sektion */
+        .hall-of-fame {
+            margin: 30px 0;
+            padding: 15px;
+            background: rgba(255, 215, 0, 0.05);
+            border-radius: 15px;
+            border: 1px dashed var(--fux-gold);
         }
 
-        /* Links */
+        .hall-of-fame h2 {
+            font-size: 1.1rem;
+            color: var(--fux-gold);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .hof-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .hof-name {
+            background: #2a2a2a;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            border: 1px solid #444;
+            transition: 0.3s;
+        }
+
+        .hof-name:hover {
+            border-color: var(--fux-gold);
+            transform: scale(1.05);
+        }
+
+        /* Buttons */
         .link-tree {
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 12px;
         }
 
         .btn {
             background-color: var(--fux-orange);
             color: black;
             text-decoration: none;
-            padding: 16px;
+            padding: 14px;
             border-radius: 12px;
             font-weight: 800;
             transition: 0.3s;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            position: relative;
         }
 
         .btn:hover {
             background-color: #ffaa33;
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(255, 140, 0, 0.4);
-        }
-
-        /* Dankes-Nachricht beim Hover */
-        .btn-sub::after {
-            content: "Ehren-Fux! ❤️";
-            position: absolute;
-            bottom: -25px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 0.7rem;
-            color: var(--fux-orange);
-            opacity: 0;
-            transition: 0.3s;
-        }
-
-        .btn-sub:hover::after {
-            opacity: 1;
+            transform: translateY(-2px);
         }
 
         .footer {
-            margin-top: 50px;
-            font-size: 0.75rem;
+            margin-top: 40px;
+            font-size: 0.7rem;
             color: #555;
         }
     </style>
@@ -187,27 +189,36 @@
 
     <div class="container">
         <div class="avatar-container">
-            <div class="fux-msg">Klick mich! 🦊</div>
+            <div class="fux-msg">Klick den Fux! 🦊</div>
             <img src="channels4_profile.jpg" alt="Remosmiles" class="fux-avatar" onclick="celebrate()">
         </div>
         
         <h1>Remosmiles</h1>
-        <p class="sub-headline">Fortnite Gameplay & Memes</p>
 
         <div class="progress-container">
             <div id="progress-bar" class="progress-bar"></div>
             <div id="sub-text" class="progress-text">0 / 1000 Füchse</div>
         </div>
-        <p id="motivation" class="motivation">Lade Fux-Power...</p>
+        <p id="motivation" style="color:var(--fux-orange); font-weight:bold; font-size:0.85rem; margin-bottom:20px;">Lade...</p>
+
+        <div class="hall-of-fame">
+            <h2>🏆 Hall of Fame</h2>
+            <div class="hof-grid">
+                <span class="hof-name">TopSupporter1</span>
+                <span class="hof-name">FuxFan_99</span>
+                <span class="hof-name">FortniteKing</span>
+                <span class="hof-name">EhrenGast_12</span>
+                <span class="hof-name">Lächeln_Expert</span>
+            </div>
+        </div>
 
         <div class="link-tree">
-            <a href="https://www.youtube.com/@remosmiles?sub_confirmation=1" target="_blank" class="btn btn-sub" onclick="celebrate()">🔥 Werde Teil der 1000!</a>
-            <a href="https://www.youtube.com/@remosmiles/shorts" target="_blank" class="btn">🦊 Beste Shorts</a>
-            <a href="https://www.tiktok.com/@deintiktok" target="_blank" class="btn" style="background: #fff; color: #000;">🎵 TikTok Memes</a>
+            <a href="https://www.youtube.com/@remosmiles?sub_confirmation=1" target="_blank" class="btn" onclick="celebrate()">🔥 Werde die Nummer 1000!</a>
+            <a href="https://www.youtube.com/@remosmiles/shorts" target="_blank" class="btn" style="background:#444; color:white;">🎬 Alle Shorts</a>
         </div>
 
         <div class="footer">
-            &copy; 2026 Remosmiles | Mit KI-Power zum Sieg 👑
+            &copy; 2026 Remosmiles | Schichtchef & Content Creator
         </div>
     </div>
 
@@ -225,49 +236,34 @@
                 const percent = (currentSubs / goal) * 100;
                 progressBar.style.width = percent + "%";
                 
-                let displayValue = currentSubs - 20;
+                let displayValue = currentSubs - 15;
                 const timer = setInterval(() => {
                     if (displayValue >= currentSubs) {
                         clearInterval(timer);
-                        motivation.innerText = "🔥 Noch " + (goal - currentSubs) + " Abos bis zum 1k Special!";
+                        motivation.innerText = "🔥 Noch " + (goal - currentSubs) + " bis zum Ziel!";
                     } else {
                         displayValue++;
                         subText.innerText = displayValue + " / " + goal + " Füchse";
                     }
-                }, 50);
+                }, 60);
             }, 500);
         }
 
         function celebrate() {
             clickCount++;
-            
-            // Konfetti-Stoß
             confetti({
-                particleCount: 120,
-                spread: 70,
-                origin: { y: 0.7 },
-                colors: ['#ff8c00', '#ffffff', '#ffcc00']
+                particleCount: 100, spread: 70, origin: { y: 0.7 },
+                colors: ['#ff8c00', '#ffd700', '#ffffff']
             });
 
-            // EASTER EGG: Nach 10 Klicks
             if (clickCount === 10) {
-                var duration = 3 * 1000;
-                var animationEnd = Date.now() + duration;
-                var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
-
-                function randomInRange(min, max) {
-                  return Math.random() * (max - min) + min;
-                }
-
-                var interval = setInterval(function() {
-                  var timeLeft = animationEnd - Date.now();
-                  if (timeLeft <= 0) { return clearInterval(interval); }
-                  var particleCount = 50 * (timeLeft / duration);
-                  confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } }));
-                  confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } }));
-                }, 250);
-
-                setTimeout(() => { alert("🦊 ULTRA-FUX MODUS AKTIVIERT!"); }, 500);
+                var duration = 4 * 1000;
+                var end = Date.now() + duration;
+                (function frame() {
+                  confetti({ particleCount: 3, angle: 60, spread: 55, origin: { x: 0 }, colors: ['#ff8c00', '#ffd700'] });
+                  confetti({ particleCount: 3, angle: 120, spread: 55, origin: { x: 1 }, colors: ['#ff8c00', '#ffd700'] });
+                  if (Date.now() < end) { requestAnimationFrame(frame); }
+                }());
                 clickCount = 0;
             }
         }

@@ -67,6 +67,31 @@
             &copy; 2026 Remosmiles - Erstellt mit KI-Power
         </div>
     </div>
+<script>
+async function updateSubCount() {
+    const apiKey = 'DEIN_API_KEY_HIER'; // Hier kommt dein Key rein
+    const channelId = 'UC_DEINE_CHANNEL_ID'; // Deine YouTube Channel ID
+    
+    try {
+        const response = await fetch(`https://www.googleapis.com/youtube/v3/channels?part=statistics&id=${channelId}&key=${apiKey}`);
+        const data = await response.json();
+        const subCount = data.items[0].statistics.subscriberCount;
+        
+        // Den Text im Balken aktualisieren
+        document.getElementById('sub-text').innerText = subCount + " / 1000 Füchse";
+        
+        // Den Fortschrittsbalken berechnen (Prozent)
+        const percent = (subCount / 1000) * 100;
+        document.getElementById('progress-bar').style.width = percent + "%";
+        
+    } catch (error) {
+        console.error("Fehler beim Laden der Abos:", error);
+    }
+}
 
+// Alle 5 Minuten aktualisieren
+updateSubCount();
+setInterval(updateSubCount, 300000); 
+</script>
 </body>
 </html>

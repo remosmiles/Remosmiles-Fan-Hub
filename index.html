@@ -51,23 +51,26 @@
 </head>
 <body>
 
-    <div class="container">
-        <img src="https://via.placeholder.com/150/ff8c00/000000?text=Fux" alt="Remosmiles Logo" class="fux-img">
+   <div id="abo-counter-box" style="margin-top: 30px; text-align: center; width: 100%;">
+    <div style="background: #333; border-radius: 20px; height: 30px; width: 100%; position: relative; overflow: hidden; border: 2px solid #ff8c00; box-shadow: 0 0 15px rgba(255, 140, 0, 0.3);">
+        <div id="progress-bar" style="background: linear-gradient(90deg, #ff8c00, #ffcc00); height: 100%; width: 92.5%; transition: width 1.5s ease-in-out;"></div>
         
-        <h1>Remosmiles</h1>
-        <p class="stats">🦊 Fast 1.000 Abonnenten – Join the Gang!</p>
-
-        <div class="links">
-            <a href="https://www.youtube.com/@remosmiles" target="_blank" class="btn">📺 Mein YouTube Kanal</a>
-            <a href="#" class="btn">🎮 Fortnite Best-of Clips</a>
-            <a href="https://www.tiktok.com/@deintiktok" target="_blank" class="btn">🎵 Lustige Meme Shorts</a>
-        </div>
-
-        <div class="footer">
-            &copy; 2026 Remosmiles - Erstellt mit KI-Power
-        </div>
+        <span id="sub-text" style="position: absolute; width: 100%; left: 0; top: 0; line-height: 30px; font-size: 0.9rem; font-weight: bold; color: white; text-shadow: 1px 1px 3px black;">
+            925 / 1000 Füchse
+        </span>
     </div>
-<script>
+    <p id="motivation-text" style="font-size: 0.85rem; margin-top: 8px; color: #ff8c00; font-weight: bold; animation: pulse 2s infinite;">
+        🔥 Nur noch 75 Abos bis zum 1k Special!
+    </p>
+</div>
+
+<style>
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+</style>
 async function updateSubCount() {
     const apiKey = 'DEIN_API_KEY_HIER'; // Hier kommt dein Key rein
     const channelId = 'UC_DEINE_CHANNEL_ID'; // Deine YouTube Channel ID
